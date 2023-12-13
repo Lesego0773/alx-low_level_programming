@@ -2,10 +2,10 @@
 #include <stddef.h>
 
 /**
- * _strlen - counts string length
- * @str: string to be used
+ * _strlen - Counts string length.
+ * @str: String to be used.
  *
- * Return: length of the string
+ * Return: Length of the string.
  */
 int _strlen(char *str)
 {
@@ -17,11 +17,11 @@ int _strlen(char *str)
 }
 
 /**
- * create_file - creates a file
- * @filename: name of the file
- * @text_content: content of the file to be created
+ * create_file - Creates a file.
+ * @filename: Name of the file.
+ * @text_content: Content of the file to be created.
  *
- * Return: 1 on success, -1 otherwise
+ * Return: 1 on success, -1 otherwise.
  */
 int create_file(const char *filename, char *text_content)
 {
@@ -29,9 +29,11 @@ int create_file(const char *filename, char *text_content)
 
 	if (filename == NULL)
 		return (-1);
+
 	file = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	if (file == -1)
 		return (-1);
+
 	if (text_content != NULL)
 	{
 		wrote = write(file, text_content, _strlen(text_content));
@@ -49,3 +51,4 @@ int create_file(const char *filename, char *text_content)
 		return (1);
 	}
 }
+
