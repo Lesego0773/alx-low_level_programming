@@ -1,54 +1,48 @@
+#include <stddef.h>
 #include "main.h"
 
-int _pow_recursion(int x, int y);
 /**
- * binary_to_uint - function with one argument
- * @b: pointer to character
+ * check_valid_string - checks if a string has only 0's and 1's
+ * @b: string to be checked
  *
- * Description: converts a binary number to an unsigned int
- * Return: converted number or 0 if NULL
+ * Return: 1 if string is valid, 0 otherwise
  */
-unsigned int binary_to_uint(const char *b)
+int check_valid_string(const char *b)
 {
-	unsigned int value = 0;
-	unsigned int power = 0;
-	int count = 0;
-
-	if (!b)
+	if (b == NULL)
 		return (0);
-	/* Get length of string */
-	while (b[count] != '\0')
+	while (*b)
 	{
-		if (b[count] != '0' && b[count] != '1')
+		if (*b != '1' && *b != '0')
 			return (0);
-		count++;
+		b++;
 	}
-	count -= 1;
-	while (count >= 0)
-	{
-		if (b[count] == '1')
-			value += _pow_recursion(2, power);
-		power++;
-		count--;
-	}
-	return (value);
+
+	return (1);
 }
 
 
 /**
- * _pow_recursion - function with two arguments
- * @x: int type 1st argument
- * @y: int type 2nd argument
+ * binary_to_uint - converts a binary to an unsigned int
+ * @b: the binary number as a string
  *
- * Description: returns the value of x raised to power of y
- * Return: value of x
+ * Return: the converted value
  */
-int _pow_recursion(int x, int y)
+unsigned int binary_to_uint(const char *b)
 {
-	if (y == 0)
-		return (1);
-	else if (y < 0)
-		return (-1);
-	else
-		return (x * _pow_recursion(x, y - 1));
+	unsigned int decimal = 0;
+	int str_len = 0, base = 1;
+
+	if (!check_valid_string(b))
+		return (0);
+	while (b[str_len] != '\0')
+		str_len++;
+	while (str_len)
+	{
+		decimal += ((b[str_len - 1] - '0') * base);
+		base *= 2;
+		str_len--;
+	}
+
+	return (decimal);
 }
