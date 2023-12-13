@@ -1,48 +1,40 @@
-#include <stddef.h>
 #include "main.h"
 
 /**
- * check_valid_string - checks if a string has only 0's and 1's
- * @b: string to be checked
+ * binary_to_uint - Convert binary to decimal.
+ * @b: The binary number in string format.
  *
- * Return: 1 if string is valid, 0 otherwise
- */
-int check_valid_string(const char *b)
-{
-	if (b == NULL)
-		return (0);
-	while (*b)
-	{
-		if (*b != '1' && *b != '0')
-			return (0);
-		b++;
-	}
-
-	return (1);
-}
-
-
-/**
- * binary_to_uint - converts a binary to an unsigned int
- * @b: the binary number as a string
- *
- * Return: the converted value
+ * Description: Converts a binary string to a decimal number.
+ * Section header: The header of this function is header.h.
+ * Return: The converted decimal number, or 0 if @b is NULL or contains
+ *         characters other than '0' and '1'.
  */
 unsigned int binary_to_uint(const char *b)
 {
-	unsigned int decimal = 0;
-	int str_len = 0, base = 1;
+	unsigned int result, base;
+	int i;
 
-	if (!check_valid_string(b))
+	result = 0;
+	i = 0;
+	base = 1;
+
+	if (!b)
 		return (0);
-	while (b[str_len] != '\0')
-		str_len++;
-	while (str_len)
+
+	while (*(b + i))
 	{
-		decimal += ((b[str_len - 1] - '0') * base);
-		base *= 2;
-		str_len--;
+		if (*(b + i) != '0' && *(b + i) != '1')
+			return (0);
+		i++;
 	}
 
-	return (decimal);
+	for (i--; i >= 0; i--)
+	{
+		if (*(b + i) == '1')
+			result = result + base;
+		base = base * 2;
+	}
+
+	return (result);
 }
+
