@@ -1,8 +1,9 @@
-#ifndef _SORTING_ALGOS_H_
-#define _SORTING_ALGOS_H_
+#ifndef SEARCH_ALGOS
+#define SEARCH_ALGOS
 
-#include <stdlib.h>
+#include <stddef.h>
 #include <stdio.h>
+#include <math.h>
 
 /**
  * struct listint_s - singly linked list
@@ -12,7 +13,6 @@
  * @next: Pointer to the next node
  *
  * Description: singly linked list node structure
- * for Holberton project
  */
 typedef struct listint_s
 {
@@ -29,8 +29,7 @@ typedef struct listint_s
  * @next: Pointer to the next node
  * @express: Pointer to the next node in the express lane
  *
- * Description: singly linked list node structure with an express lane
- * for Holberton project
+ * Description: singly linked list node structure with an express lane.
  */
 typedef struct skiplist_s
 {
